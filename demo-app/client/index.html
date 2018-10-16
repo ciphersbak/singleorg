@@ -1,0 +1,146 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hyperledger Fabric Demo App</title>
+    <link rel="icon" href="favicon.png" type="image/gif">
+
+    <!-- require jquery and bootstrap scripts -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    
+    <!-- adding style here -->
+    <style type="text/css">
+      header{
+        background-color: lightgray;
+        font-size:20px;
+        padding:15px;
+      }
+      header, .form-group{
+        margin-bottom: 3%;
+      }
+      .form-group{
+        width:50%;
+      }
+      #body{
+        margin-left:3%;
+        margin-right:3%;
+      }
+      .form-control{
+        margin: 8px;
+      }
+      #right_header{
+        width:20%;
+        font-size:15px;
+        margin-right:0px;
+      }
+      #left_header{
+        margin-left:0;
+        width:40%;
+        display:inline-block;
+      } 
+      #id {
+        width:49%;
+        display: inline-block;
+      }
+      table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+      }
+      td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+      }
+      tr:nth-child(even) {
+          background-color: #dddddd;
+      }
+    </style>
+  </head>
+  <body ng-app="application" ng-controller="appController">
+    <header>
+      <div id="left_header">Hyperledger Fabric Demo App</div>
+      <i id="right_header">Example Blockchain Application for Storing Property Records</i>
+    </header>
+
+    <div id="body">
+      <div class="form-group">
+        <label>Query All Property</label>
+        <p><input id="queryAllProperty" type="submit" value="Query" class="btn btn-primary" ng-click="queryAllProperty()"></p>
+      </div>
+ 
+      <table id="all_property" class="table" align="center">
+
+        <tr>
+          <th>ID</th>
+          <th>Property Name</th>
+          <th>Holder</th>
+          <th>Property Location <br>(Longitude, Latitude)</th>
+          <th>Timestamp</th>
+        </tr>
+
+        <tr ng-repeat="property in all_property">
+          <td>{{property.Key}}</td>
+          <td>{{property.propertyname}}</td>
+          <td>{{property.holder}}</td>
+          <td>{{property.location}}</td>
+          <td>{{property.timestamp}}</td>
+        </tr>
+      </table>
+
+      <div class="form-group">
+        <label>Query a Specific Property</label><br>
+        <h5 style="color:red;margin-bottom:2%" id="error_query">Error: Please enter a valid Property ID</h5>
+        
+        Enter a property number: <input id="createName" class="form-control" type="text" placeholder="Ex: 3" ng-model="property_id">
+        <input id="querySubmit" type="submit" value="Query" class="btn btn-primary" ng-click="queryProperty()">
+      </div>
+
+      <table id="query_property" class="table" align="center">
+
+        <tr>
+          <th>Property Name</th>
+          <th>Holder</th>
+          <th>Property Location <br>(Longitude, Latitude)</th>
+          <th>Timestamp</th>
+        </tr>
+
+        <tr>
+          <td>{{query_property.propertyname}}</td>
+          <td>{{query_property.holder}}</td>
+          <td>{{query_property.location}}</td>
+          <td>{{query_property.timestamp}}</td>
+        </tr>
+      </table>
+
+      <div class="form-group">
+        <label>Create Property Record</label>
+        <h5 style="color:green;margin-bottom:2%" id="success_create">Success! Tx ID: {{create_property}}</h5>
+        <br>
+        Enter property id: <input class="form-control" type="text" placeholder="Ex: 11" ng-model="property.id">
+        Enter name of property: <input class="form-control" type="text" placeholder="Ex: 0293L" ng-model="property.propertyname">
+        Enter name of holder: <input class="form-control" type="text" placeholder="Ex: Hansel" ng-model="property.holder">
+		Enter longitude: <input id="createName" class="form-control" type="text" placeholder="Ex: 28.012" ng-model="property.longitude"> 
+        Enter latitude: <input id="createName" class="form-control" type="text" placeholder="Ex: 150.405" ng-model="property.latitude">
+        Enter timestamp: <input class="form-control" type="text" placeholder="Ex: 4982342301" ng-model="property.timestamp">
+        <input id="createSubmit" type="submit" value="Create" class="btn btn-primary" ng-click="recordProperty()"> 
+      </div>
+
+      <div class="form-group">
+        <label>Change Property Holder</label><br>
+        <h5 style="color:green;margin-bottom:2%" id="success_holder">Success! Tx ID: {{change_holder}}</h5>
+        <h5 style="color:red;margin-bottom:2%" id="error_holder">Error: Please enter a valid Property ID</h5>
+        Enter a property id: <input class="form-control" name="assetSelect" placeholder="Ex: 1" ng-model="holder.id">
+        Enter name of new holder: <input class="form-control" name="assetSelect" placeholder="Ex: Barry" ng-model="holder.name">
+        <input id="transferSubmit" type="submit" value="Change" class="btn btn-primary" ng-click="changeHolder()">
+      </div>
+
+    </div>
+  </body>
+    <!-- requiring the angular page -->
+    <script type="text/javascript" src="app.js"> </script>
+</html>
