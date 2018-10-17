@@ -2,8 +2,10 @@
 PP learning HLF
 This is a sample app on HLF to store property records
 
-Fabric Repo - https://github.com/hyperledger/fabric-samples
-Edx Original Source Code - https://github.com/hyperledger/education/tree/master/LFS171x
+Fabric Repo - https://github.com/hyperledger/fabric-samples 
+
+Edx Original Source Code - https://github.com/hyperledger/education/tree/master/LFS171x 
+
 yeasy Repo - https://github.com/yeasy/docker-compose-files/tree/master/hyperledger_fabric/v1.2.0
 
 Learn how to start building applications with Hyperledger Fabric. 
