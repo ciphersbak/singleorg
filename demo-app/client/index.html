@@ -122,11 +122,11 @@
         <h5 style="color:green;margin-bottom:2%" id="success_create">Success! Tx ID: {{create_property}}</h5>
         <br>
         Enter property id: <input class="form-control" type="text" placeholder="Ex: 11" ng-model="property.id">
-        Enter name of property: <input class="form-control" type="text" placeholder="Ex: 0293L" ng-model="property.propertyname">
-        Enter name of holder: <input class="form-control" type="text" placeholder="Ex: Hansel" ng-model="property.holder">
-		Enter longitude: <input id="createName" class="form-control" type="text" placeholder="Ex: 28.012" ng-model="property.longitude"> 
-        Enter latitude: <input id="createName" class="form-control" type="text" placeholder="Ex: 150.405" ng-model="property.latitude">
-        Enter timestamp: <input class="form-control" type="text" placeholder="Ex: 4982342301" ng-model="property.timestamp">
+        Enter name of property: <input class="form-control" type="text" placeholder="Ex: Decriptive name of the property" ng-model="property.propertyname">
+        Enter name of holder: <input class="form-control" type="text" placeholder="Ex: Property Holder" ng-model="property.holder">
+	Enter latitude: <input id="createName" class="form-control" type="text" placeholder="Ex: 28.0124N" ng-model="property.latitude">
+	Enter longitude: <input id="createName" class="form-control" type="text" placeholder="Ex: 150.0128E" ng-model="property.longitude">
+        Enter timestamp: <input class="form-control" type="text" placeholder="Ex: Unix Timestamp 4982342301" ng-model="property.timestamp">
         <input id="createSubmit" type="submit" value="Create" class="btn btn-primary" ng-click="recordProperty()"> 
       </div>
 
