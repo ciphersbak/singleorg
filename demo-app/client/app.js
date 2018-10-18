@@ -88,7 +88,7 @@ app.factory('appFactory', function($http){
 
 	factory.recordProperty = function(data, callback){
 
-		data.location = data.longitude + ", "+ data.latitude;
+		data.location = data.latitude + ", "+ data.longitude;
 
 		var property = data.id + "-" + data.location + "-" + data.timestamp + "-" + data.holder + "-" + data.propertyname;
 
@@ -108,4 +108,3 @@ app.factory('appFactory', function($http){
 
 	return factory;
 });
-
