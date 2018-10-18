@@ -59,10 +59,10 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 		return s.initLedger(APIstub)
 	} else if function == "recordProperty" {
 		return s.recordProperty(APIstub, args)
-	} else if function == "changePropertyHolder" {
-		return s.changePropertyHolder(APIstub, args)
 	} else if function == "queryAllProperty" {
 		return s.queryAllProperty(APIstub)
+	} else if function == "changePropertyHolder" {
+		return s.changePropertyHolder(APIstub, args)
 	}
 	fmt.Println("Invoke failed for unknown function " + function)
 	return shim.Error("Invalid Smart Contract function name")
@@ -75,6 +75,21 @@ This method takes in five arguments (attributes to be saved in the ledger).
 func (s *SmartContract) recordProperty(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 	if len(args) != 5 {
 		return shim.Error("Incorrect number of arguments. Expecting 5")
+	}
+	if len(args[0]) <= 0 {
+		return shim.Error("Property ID must be a non-empty string")
+	}
+	if len(args[1]) <= 0 {
+		return shim.Error("Property Name must be a non-empty string")
+	}
+	if len(args[2]) <= 0 {
+		return shim.Error("Location must be a non-empty string")
+	}
+	if len(args[3]) <= 0 {
+		return shim.Error("Timestamp must be a non-empty string")
+	}
+	if len(args[4]) <= 0 {
+		return shim.Error("Holder must be a non-empty string")
 	}
 	var property = Property{PropertyName: args[1], Location: args[2], Timestamp: args[3], Holder: args[4]}
 	propertyAsBytes, _ := json.Marshal(property)
@@ -94,6 +109,9 @@ It takes one argument -- the key for the Property in question
 func (s *SmartContract) queryProperty(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting 1")
+	}
+	if len(args[0]) <= 0 {
+		return shim.Error("Property ID must be a non-empty string")
 	}
 	propertyAsBytes, _ := APIstub.GetState(args[0])
 	if propertyAsBytes == nil {
@@ -177,12 +195,19 @@ func (s *SmartContract) changePropertyHolder(APIstub shim.ChaincodeStubInterface
 	if len(args) != 2 {
 		return shim.Error("Incorrect number of arguments. Expecting 2")
 	}
+	if len(args[0]) <= 0 {
+		return shim.Error("Property ID must be a non-empty string")
+	}
+	if len(args[1]) <= 0 {
+		return shim.Error("Holder must be a non-empty string")
+	}
 	propertyAsBytes, _ := APIstub.GetState(args[0])
-	if propertyAsBytes != nil {
+	if propertyAsBytes == nil {
 		return shim.Error(fmt.Sprintf("Could not locate property: %s", args[0]))
 	}
 	property := Property{}
 	json.Unmarshal(propertyAsBytes, &property)
+
 	// Check that the specified argument is a valid holder of property
 	property.Holder = args[1]
 	propertyAsBytes, _ = json.Marshal(property)
