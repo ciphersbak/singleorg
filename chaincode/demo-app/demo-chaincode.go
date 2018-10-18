@@ -76,7 +76,7 @@ func (s *SmartContract) recordProperty(APIstub shim.ChaincodeStubInterface, args
 	if len(args) != 5 {
 		return shim.Error("Incorrect number of arguments. Expecting 5")
 	}
-	if len(args[0]) <= 0 {
+	if len(args[0]) <= 0 && args[0] != "" {
 		return shim.Error("Property ID must be a non-empty string")
 	}
 	if len(args[1]) <= 0 {
@@ -91,7 +91,10 @@ func (s *SmartContract) recordProperty(APIstub shim.ChaincodeStubInterface, args
 	if len(args[4]) <= 0 {
 		return shim.Error("Holder must be a non-empty string")
 	}
-	var property = Property{PropertyName: args[1], Location: args[2], Timestamp: args[3], Holder: args[4]}
+	timeStamp := args[3]
+	// timeStamp = string(int64(time.Now().UnixNano())) // 2038 year problem
+	// var property = Property{PropertyName: args[1], Location: args[2], Timestamp: args[3], Holder: args[4]}
+	var property = Property{PropertyName: args[1], Location: args[2], Timestamp: timeStamp, Holder: args[4]}
 	propertyAsBytes, _ := json.Marshal(property)
 	err := APIstub.PutState(args[0], propertyAsBytes)
 	if err != nil {
@@ -169,10 +172,11 @@ Will add test data (4 properties)to our network
 func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Response {
 	// manually insert entries into the ledger
 	property := []Property{
-		Property{PropertyName: "21D Avalon Midtown West", Location: "67.0006, -70.5476", Timestamp: "1504054225", Holder: "Vettel"},
-		Property{PropertyName: "314 Jacobs Creek", Location: "91.2395, -49.4594", Timestamp: "1504057825", Holder: "Hamilton"},
-		Property{PropertyName: "Burj Khalifa", Location: "58.0148, 59.01391", Timestamp: "1493517025", Holder: "Schumacher"},
-		Property{PropertyName: "Empire State Tower", Location: "153.0054, 12.6429", Timestamp: "1485153091", Holder: "Verstappen"},
+		Property{PropertyName: "Taj Mahal", Location: "27.1750, 78.0422", Timestamp: "1485153091", Holder: "Vanguard"},
+		Property{PropertyName: "Kremlin", Location: "55.7520, 37.6175", Timestamp: "1504054225", Holder: "Vettel"},
+		Property{PropertyName: "One World Trade Centre", Location: "40.7127, 74.0134", Timestamp: "1504057825", Holder: "Hamilton"},
+		Property{PropertyName: "Burj Khalifa", Location: "25.1972, 55.2744", Timestamp: "1493517025", Holder: "Schumacher"},
+		Property{PropertyName: "Louvre Museum", Location: "48.8606, 2.3376", Timestamp: "1485153091", Holder: "Verstappen"},
 	}
 	i := 0
 	for i < len(property) {
@@ -195,7 +199,7 @@ func (s *SmartContract) changePropertyHolder(APIstub shim.ChaincodeStubInterface
 	if len(args) != 2 {
 		return shim.Error("Incorrect number of arguments. Expecting 2")
 	}
-	if len(args[0]) <= 0 {
+	if len(args[0]) <= 0 && args[0] != "" {
 		return shim.Error("Property ID must be a non-empty string")
 	}
 	if len(args[1]) <= 0 {
@@ -207,6 +211,10 @@ func (s *SmartContract) changePropertyHolder(APIstub shim.ChaincodeStubInterface
 	}
 	property := Property{}
 	json.Unmarshal(propertyAsBytes, &property)
+	newOwner := args[1]
+	if property.Holder == newOwner {
+		return shim.Error("Current and New Property Owner cannot be same")
+	}
 
 	// Check that the specified argument is a valid holder of property
 	property.Holder = args[1]
