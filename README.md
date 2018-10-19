@@ -1,5 +1,6 @@
 # PPHLF
 PP learning HLF
+
 This is a sample app on HLF to store property records 
 
 | Repo         | Link         |
@@ -10,6 +11,7 @@ This is a sample app on HLF to store property records
 | AWS Template | https://docs.aws.amazon.com/blockchain-templates/latest/developerguide/blockchain-templates-hyperledger.html#blockchain-hyperledger-launch |
 
 Learn how to start building applications with Hyperledger Fabric. 
+
 This example makes use of configtxgen and is for development ONLY. Make use of Fabric-CA for production environments
 
 1. Define/Change crypto-config.yaml (Make sure you set EnableNodeOUs: true) 
