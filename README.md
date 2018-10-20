@@ -1,6 +1,6 @@
 # PP Learning HLF
 
-### This is a sample app on HLF to store property records 
+### Links
 
 | Repo         | 
 | ------------ | 
@@ -10,6 +10,7 @@
 | [yeasy Repo](https://github.com/yeasy/docker-compose-files/tree/master/hyperledger_fabric/v1.2.0) |
 | [AWS Template](https://docs.aws.amazon.com/blockchain-templates/latest/developerguide/blockchain-templates-hyperledger.html#blockchain-hyperledger-launch) |
 
+### This is a sample app on HLF to store property records
 You will be provisioning a local network with the following docker container configuration:
 
 * 1 CA
