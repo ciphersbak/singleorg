@@ -1,6 +1,10 @@
 # PP Learning HLF
 
 Install HLF 1.3 on [Ubuntu 16.0.4/18.0.4](https://medium.com/@eSizeDave/https-medium-com-esizedave-how-to-install-hyperledger-fabric-1-2-on-ubuntu-16-04-lts-ecdfa4dcec72)
+```
+curl -sSL http://bit.ly/2ysbOFE | bash -s <fabric> <fabric-ca> <thirdparty>
+curl -sSL http://bit.ly/2ysbOFE | bash -s 1.3.0 1.3.0 0.4.13
+```
 
 ### Links
 
