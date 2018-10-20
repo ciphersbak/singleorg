@@ -1,7 +1,7 @@
 # PPHLF
-PP learning HLF
+## PP learning HLF
 
-This is a sample app on HLF to store property records 
+### This is a sample app on HLF to store property records 
 
 | Repo         | Link         |
 | ------------ | ------------ |
@@ -21,7 +21,9 @@ You will be provisioning a local network with the following docker container con
 * Crypto material has been generated using the **cryptogen** tool from Hyperledger Fabric and mounted to all peers, the orderering node  and CA containers. More details regarding the cryptogen tool are available [here](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html#crypto-generator).
 * An Orderer genesis block (genesis.block) and channel configuration transaction (mychannel.tx) has been pre generated using the **configtxgen** tool from Hyperledger Fabric and placed within the artifacts folder. More details regarding the configtxgen tool are available [here](https://hyperledger-fabric.readthedocs.io/en/latest/build_network.html#configuration-transaction-generator).
 
-This example makes use of configtxgen and is for development ONLY. Make use of Fabric-CA for production environments
+###### This example makes use of configtxgen and is for development ONLY. Make use of Fabric-CA for production environments
+
+#### Setup:
 
 1. Define/Change crypto-config.yaml (Make sure you set EnableNodeOUs: true) 
 2. Network Topology - OrdererOrgs - Name, Domain, Hostname, PeerOrgs - Name, Domain Users - Count in addition to Admin
