@@ -24,15 +24,32 @@ You will be provisioning a local network with the following docker container con
 
 #### Setup:
 
-* Define/Change crypto-config.yaml (Make sure you set EnableNodeOUs: true) 
-* Network Topology - OrdererOrgs - Name, Domain, Hostname, PeerOrgs - Name, Domain Users - Count in addition to Admin
-* Define/Change docker-compose.yml (FABRIC_CA_SERVER_CA_KEYFILE)
+* Define/Change crypto-config.yaml
+  * Make sure you set EnableNodeOUs: true 
+* Network Topology
+  * OrdererOrgs
+    * Name
+    * Domain
+    * Hostname 
+  * PeerOrgs
+    * Name 
+  * Domain Users
+    * Count 1 in addition to Admin
+* Define/Change docker-compose.yml 
+  * FABRIC_CA_SERVER_CA_KEYFILE
 * Define/Change ./generate.sh (Based on Profiles defined in configtx.yaml)
 * Define/Change ./start.sh (Change channel name)
-* Run startFabric.sh, and replace the new key by inspecting docker logs ca.example.com (Everytime you generate new crypto material, make sure you update "FABRIC_CA_SERVER_CA_KEYFILE" in the "docker-compose.yml" file)
-* Bring up the n/w by running startFabric.sh (> launch network; create channel and join peer to channel > launch CLI container in order to install, instantiate chaincode > bootstrap/ledger with property)
-* Enroll Admin and Register the User (node registerAdmin.js, node registerUser.js)
-* Start server (node server.js http://localhost:8000)
+* Run startFabric.sh, and replace the new key by inspecting docker logs ca.example.com
+  * Everytime you generate new crypto material, make sure you update "FABRIC_CA_SERVER_CA_KEYFILE" in the "docker-compose.yml" file
+* Bring up the n/w by running startFabric.sh 
+  * launch network; create channel and join peer to channel
+  * launch CLI container in order to install, instantiate chaincode
+  * bootstrap/ledger with property
+* Enroll Admin and Register the User
+  * node registerAdmin.js
+  * node registerUser.js
+* Start server 
+  * node server.js http://localhost:8000
 
 #### To Do/Findings:
 
