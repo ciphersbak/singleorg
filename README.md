@@ -2,13 +2,13 @@
 
 ### This is a sample app on HLF to store property records 
 
-| Repo         | Link         |
-| ------------ | ------------ |
-| Fabric Repo  | https://github.com/hyperledger/fabric-samples |
-| Bal Transfer | https://github.com/hyperledger/fabric-samples/tree/release-1.3/balance-transfer |
-| Edx Repo     | https://github.com/hyperledger/education/tree/master/LFS171x |
-| yeasy Repo   | https://github.com/yeasy/docker-compose-files/tree/master/hyperledger_fabric/v1.2.0 |
-| AWS Template | https://docs.aws.amazon.com/blockchain-templates/latest/developerguide/blockchain-templates-hyperledger.html#blockchain-hyperledger-launch |
+| Repo         | 
+| ------------ | 
+| [Fabric Repo](https://github.com/hyperledger/fabric-samples)
+| [Bal Transfer](https://github.com/hyperledger/fabric-samples/tree/release-1.3/balance-transfer) | 
+| [Edx Repo](https://github.com/hyperledger/education/tree/master/LFS171x) |
+| [yeasy Repo](https://github.com/yeasy/docker-compose-files/tree/master/hyperledger_fabric/v1.2.0) |
+| [AWS Template](https://docs.aws.amazon.com/blockchain-templates/latest/developerguide/blockchain-templates-hyperledger.html#blockchain-hyperledger-launch) |
 
 You will be provisioning a local network with the following docker container configuration:
 
