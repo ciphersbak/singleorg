@@ -51,6 +51,10 @@ cd /usr/local/hyperledger/fabric-samples/demo-app
   * launch network; create channel and join peer to channel
   * launch CLI container in order to install, instantiate chaincode
   * bootstrap/ledger with property
+* Install node
+```
+npm install
+```
 * Enroll Admin and Register the User
   * node registerAdmin.js
   * node registerUser.js
