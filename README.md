@@ -64,6 +64,8 @@ npm install
   * node registerUser.js
 * Start server 
   * node server.js http://localhost:8000
+* Project Fauxton
+  * Couchdb - http://localhost:5984/_utils (replace 5984 based on docker-compose.yml file)
 
 #### To Do/Findings:
 
