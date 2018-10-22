@@ -8,6 +8,7 @@ curl -sSL http://bit.ly/2ysbOFE | bash -s 1.3.0 1.3.0 0.4.13
 
 ### Links
 
+* [Fabric Master](https://github.com/hyperledger/fabric/tree/master)
 * [Fabric Repo](https://github.com/hyperledger/fabric-samples)
 * [Bal Transfer](https://github.com/hyperledger/fabric-samples/tree/release-1.3/balance-transfer) 
 * [Edx Repo](https://github.com/hyperledger/education/tree/master/LFS171x)
