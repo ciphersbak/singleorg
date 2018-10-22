@@ -67,6 +67,10 @@ npm install
   * node server.js http://localhost:8000
 * Project Fauxton
   * Couchdb - http://localhost:5984/_utils (replace 5984 based on docker-compose.yml file)
+* Query History for a Property
+  ```
+  peer chaincode query -C ppchannel -n demo-app -c '{"Args":["getHistoryForProperty", "2"]}'
+  ```
 
 #### To Do/Findings:
 
