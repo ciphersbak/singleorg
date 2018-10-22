@@ -71,6 +71,10 @@ npm install
   ```
   peer chaincode query -C ppchannel -n demo-app -c '{"Args":["getHistoryForProperty", "2"]}'
   ```
+* Rich Query Support (CouchDB)  
+  ```
+  peer chaincode query -C ppchannel -n demo-app -c '{"Args":["queryPropertyByHolder", "Vettel"]}'
+  ```
 
 #### To Do/Findings:
 
