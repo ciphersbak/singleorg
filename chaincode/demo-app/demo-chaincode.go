@@ -68,6 +68,8 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 		return s.getHistoryForProperty(APIstub, args)
 	} else if function == "queryPropertyByHolder" {
 		return s.queryPropertyByHolder(APIstub, args)
+	} else if function == "delete" {
+		return s.delete(APIstub, args)
 	}
 	fmt.Println("Invoke failed for unknown function " + function)
 	return shim.Error("Invalid Smart Contract function name")
@@ -241,11 +243,11 @@ func (s *SmartContract) getHistoryForProperty(APIstub shim.ChaincodeStubInterfac
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
 	key := args[0]
-	propertyAsBytes, _ := APIstub.GetState(args[0])
-	if propertyAsBytes == nil {
-		return shim.Error(fmt.Sprintf("Could not locate property: %s", args[0]))
-	}
-	fmt.Println("Property found: %s", args[0])
+	// propertyAsBytes, _ := APIstub.GetState(args[0])
+	// if propertyAsBytes == nil {
+	// 	return shim.Error(fmt.Sprintf("Could not locate property: %s", args[0]))
+	// }
+	// fmt.Println("Property found: %s", args[0])
 	resultsIterator, err := APIstub.GetHistoryForKey(key)
 	if err != nil {
 		return shim.Error(err.Error())
@@ -378,6 +380,34 @@ func constructQueryResponseFromIterator(resultsIterator shim.StateQueryIteratorI
 	}
 	buffer.WriteString("]")
 	return &buffer, nil
+}
+
+/*
+ *remove a property key/value pair from the state
+ */
+func (s *SmartContract) delete(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
+	var jsonResp string
+	if len(args) != 1 {
+		return shim.Error("Incorrect number of arguments. Expecting 1")
+	}
+	key := args[0]
+	propertyAsBytes, err := APIstub.GetState(key)
+	if err != nil {
+		jsonResp = "{\"Error\":\"Failed to get the state for " + key + "\"}"
+		return shim.Error(jsonResp)
+	} else if propertyAsBytes == nil {
+		jsonResp = "{\"Error\":\"Property does not exist " + key + "\"}"
+		return shim.Error(jsonResp)
+	}
+	property := Property{}
+	json.Unmarshal(propertyAsBytes, &property)
+	err = APIstub.DelState(key) //remove the property from chaincode state
+	if err != nil {
+		return shim.Error("Failed to delete state: " + err.Error())
+	}
+	//maintain indexes if any
+	//delete index entry to state
+	return shim.Success(nil)
 }
 
 /*
