@@ -75,6 +75,10 @@ npm install
   ```
   peer chaincode query -C ppchannel -n demo-app -c '{"Args":["queryPropertyByHolder", "Vettel"]}'
   ```
+* Delete State
+  ```
+  peer chaincode invoke -C ppchannel -n demo-app -c '{"Args":["delete","1"]}'
+  ```
 
 #### To Do/Findings:
 
