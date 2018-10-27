@@ -11,6 +11,9 @@ app.controller('appController', function($scope, appFactory){
 	$("#success_create").hide();
 	$("#error_holder").hide();
 	$("#error_query").hide();
+	$("#success_delete").hide();
+	$("#error_delete").hide();
+	$("#error_history").hide();
 
 	$scope.queryAllProperty = function(){
 
@@ -66,6 +69,45 @@ app.controller('appController', function($scope, appFactory){
 		});
 	}
 
+	$scope.getHistoryForProperty = function(){
+
+		var id = $scope.history_property_id;
+		appFactory.getHistoryForProperty(id, function(data){
+			var array = [];
+			for (var i = 0; i < data.length; i++){
+				console.log("value " + data[i].Value);
+				if (data[i].Value){
+                } else {
+                data[i].Value = {};
+                }
+				data[i].Value.TxId = data[i].TxId;
+				data[i].Value.Timestamp = data[i].Timestamp;
+				data[i].Value.IsDelete = data[i].IsDelete;
+				array.push(data[i].Value);
+			}
+			array.sort(function(a, b) {
+			    return b.Timestamp - a.Timestamp;
+			});
+			console.log("array " + array);
+			$scope.all_history_property = array;
+		});
+	}
+
+	$scope.deleteProperty = function(){
+
+		var id = $scope.delete_property_id;
+		appFactory.deleteProperty(id, function(data){
+			$scope.delete_property = data;
+			if ($scope.delete_property == "Could not locate property"){
+				$("#error_delete").show();
+				$("#success_delete").hide();
+			} else{
+				$("#success_delete").show();
+				$("#error_delete").hide();
+			}
+		});
+	}
+
 });
 
 // Angular Factory
@@ -102,6 +144,20 @@ app.factory('appFactory', function($http){
 		var holder = data.id + "-" + data.name;
 
     	$http.get('/change_holder/'+holder).success(function(output){
+			callback(output)
+		});
+	}
+
+	factory.getHistoryForProperty = function(id, callback){
+
+		$http.get('/get_history_for_property/'+id).success(function(output){
+			callback(output)
+		});
+	}
+
+	factory.deleteProperty = function(id, callback){
+
+		$http.get('/delete_property/'+id).success(function(output){
 			callback(output)
 		});
 	}
