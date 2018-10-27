@@ -16,4 +16,10 @@ module.exports = function(app){
   app.get('/change_holder/:holder', function(req, res){
     property.change_holder(req, res);
   });
+  app.get('/get_history_for_property/:id', function(req, res) {
+	property.get_history_for_property(req, res);
+  });
+  app.get('/delete_property/:id', function(req, res) {
+	property.delete_property(req, res)  
+  });
 }
