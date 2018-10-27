@@ -124,8 +124,8 @@
         Enter property id: <input class="form-control" type="text" placeholder="Ex: 11" ng-model="property.id">
         Enter name of property: <input class="form-control" type="text" placeholder="Ex: Decriptive name of the property" ng-model="property.propertyname">
         Enter name of holder: <input class="form-control" type="text" placeholder="Ex: Property Holder" ng-model="property.holder">
-	Enter latitude: <input id="createName" class="form-control" type="text" placeholder="Ex: 28.0124N" ng-model="property.latitude">
-	Enter longitude: <input id="createName" class="form-control" type="text" placeholder="Ex: 150.0128E" ng-model="property.longitude">
+		Enter latitude: <input id="createName" class="form-control" type="text" placeholder="Ex: 28.0124N" ng-model="property.latitude">
+		Enter longitude: <input id="createName" class="form-control" type="text" placeholder="Ex: 150.0128E" ng-model="property.longitude">
         Enter timestamp: <input class="form-control" type="text" placeholder="Ex: Unix Timestamp 4982342301" ng-model="property.timestamp">
         <input id="createSubmit" type="submit" value="Create" class="btn btn-primary" ng-click="recordProperty()"> 
       </div>
@@ -137,6 +137,46 @@
         Enter a property id: <input class="form-control" name="assetSelect" placeholder="Ex: 1" ng-model="holder.id">
         Enter name of new holder: <input class="form-control" name="assetSelect" placeholder="Ex: Barry" ng-model="holder.name">
         <input id="transferSubmit" type="submit" value="Change" class="btn btn-primary" ng-click="changeHolder()">
+      </div>
+	  
+	  <div class="form-group">
+        <label>Get Property History</label><br>
+		<h5 style="color:red;margin-bottom:2%" id="error_history">Error: Please enter a valid Property ID</h5>
+		
+		Enter a property number: <input id="createName" class="form-control" type="text" placeholder="Ex: 3" ng-model="history_property_id">
+        <p><input id="getHistoryForProperty" type="submit" value="Query" class="btn btn-primary" ng-click="getHistoryForProperty()"></p>
+		
+      </div>
+ 
+      <table id="all_history_property" class="table" align="center">
+
+        <tr>
+          <th>TxId</th>
+          <th>Property Name</th>
+          <th>Holder</th>
+          <th>Property Location <br>(Longitude, Latitude)</th>
+          <th>Timestamp</th>
+		  <th>Txn Timestamp</th>
+		  <th>IsDelete</th>
+        </tr>
+
+        <tr ng-repeat="property in all_history_property">
+          <td>{{property.TxId}}</td>
+          <td>{{property.propertyname}}</td>
+          <td>{{property.holder}}</td>
+          <td>{{property.location}}</td>
+          <td>{{property.timestamp}}</td>
+		  <td>{{property.Timestamp}}</td>
+		  <td>{{property.IsDelete}}</td>
+        </tr>
+      </table>
+	  
+	  <div class="form-group">
+        <label>Delete Property</label><br>
+        <h5 style="color:green;margin-bottom:2%" id="success_delete">Success! Tx ID: {{delete_property}}</h5>
+        <h5 style="color:red;margin-bottom:2%" id="error_delete">Error: Please enter a valid Property ID</h5>
+        Enter a property id: <input class="form-control" name="assetSelect" placeholder="Ex: 1" ng-model="delete_property_id">
+        <input id="transferSubmit" type="submit" value="Delete Property" class="btn btn-primary" ng-click="deleteProperty()">
       </div>
 
     </div>
