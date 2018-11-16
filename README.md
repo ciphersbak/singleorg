@@ -36,6 +36,8 @@ cd /usr/local/hyperledger/fabric-samples/demo-app
 
 #### Setup:
 
+* [Build Your First Network](https://hyperledger-fabric.readthedocs.io/en/release-1.3/build_network.html)
+
 * Define/Change crypto-config.yaml
   * Make sure you set EnableNodeOUs: true 
 * Network Topology
