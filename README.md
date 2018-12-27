@@ -4,6 +4,7 @@ Install HLF 1.3 on [Ubuntu 16.0.4/18.0.4](https://medium.com/@eSizeDave/https-me
 ```
 curl -sSL http://bit.ly/2ysbOFE | bash -s <fabric> <fabric-ca> <thirdparty>
 curl -sSL http://bit.ly/2ysbOFE | bash -s 1.3.0 1.3.0 0.4.13
+curl -sSL http://bit.ly/2ysbOFE | bash -s 1.4.0-rc2 1.4.0-rc2 0.4.14
 ```
 
 ### Links
