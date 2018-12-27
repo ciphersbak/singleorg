@@ -139,7 +139,8 @@ docker inspect peer0 | grep IPAddress
 #### Fabric Examples
 * [Commercial Paper](https://github.com/hyperledger/fabric-samples/tree/master/commercial-paper)
 * [Interest Rate Swaps](https://github.com/hyperledger/fabric-samples/tree/master/interest_rate_swaps)
-These are in the master branch
+
+
 ```
 git clone --branch master https://github.com/hyperledger/fabric-samples
 ```
