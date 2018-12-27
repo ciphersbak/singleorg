@@ -134,3 +134,10 @@ To retrieve the IP Address for one of your network entities, issue the following
 # this will return the IP Address for peer0
 docker inspect peer0 | grep IPAddress
 ```
+
+#### Fabric Examples
+* [Interest Rate Swaps](https://github.com/hyperledger/fabric-samples/tree/master/interest_rate_swaps)
+This is in the master branch
+```
+git clone --branch master https://github.com/hyperledger/fabric-samples
+```
